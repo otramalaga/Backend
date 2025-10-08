@@ -14,10 +14,10 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         
-        config.addAllowedOrigin("http://localhost:5173");
-        config.addAllowedOrigin("http://localhost:3000");
-        config.addAllowedOrigin("https://otramalaga.com");
-        config.addAllowedOrigin("https://www.otramalaga.com");
+        config.addAllowedOriginPattern("http://localhost:5173");
+        config.addAllowedOriginPattern("http://localhost:3000");
+        config.addAllowedOriginPattern("https://otramalaga.com");
+        config.addAllowedOriginPattern("https://www.otramalaga.com");
         
         config.addAllowedOriginPattern("https://*.onrender.com");
         config.addAllowedOriginPattern("https://*.netlify.app");
