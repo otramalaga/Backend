@@ -17,6 +17,7 @@ public class CorsConfig {
         config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("https://otramalaga.com");
+        config.addAllowedOrigin("https://www.otramalaga.com");
         
         config.addAllowedOriginPattern("https://*.onrender.com");
         config.addAllowedOriginPattern("https://*.netlify.app");

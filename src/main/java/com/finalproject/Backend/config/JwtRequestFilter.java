@@ -42,6 +42,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
        }
 
        if (path.contains("/api/auth") || 
+           path.contains("/api/health") ||
            path.contains("/api/countries/all") || 
            path.contains("/api/images/") ||
            (path.contains("/api/bookmarks") && method.equals("GET")) ||
