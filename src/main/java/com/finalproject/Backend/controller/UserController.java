@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {"http://localhost:5173", "https://otramalaga.com"})
+@CrossOrigin(origins = {"http://localhost:5173", "https://frontend-hsom.onrender.com", "https://www.otramalaga.com", "https://otramalaga.com"})
 public class UserController {
     @Autowired
     BookmarkService bookmarkService;

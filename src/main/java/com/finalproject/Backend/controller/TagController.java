@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tags")
-@CrossOrigin(origins = {"http://localhost:5173", "https://otramalaga.com"})
+@CrossOrigin(origins = {"http://localhost:5173", "https://frontend-hsom.onrender.com", "https://www.otramalaga.com", "https://otramalaga.com"})
 public class TagController {
 
    TagService tagService;

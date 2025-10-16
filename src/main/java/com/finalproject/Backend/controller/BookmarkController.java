@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/bookmarks")
-@CrossOrigin(origins = {"http://localhost:5173", "https://aquamarine-stardust-06e107.netlify.app", "https://otramalaga.com"})
+@CrossOrigin(origins = {"http://localhost:5173", "https://frontend-hsom.onrender.com", "https://www.otramalaga.com", "https://otramalaga.com"})
 public class BookmarkController {
     @Autowired
     UserService userService;
