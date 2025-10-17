@@ -80,32 +80,53 @@ public class SecurityConfig {
 
 
     @Bean
-    public CommandLineRunner initCategories(CategoryRepository categoryRepository) {
+    public CommandLineRunner initData(CategoryRepository categoryRepository, TagRepository tagRepository) {
         return args -> {
-            // Guardar/actualizar categorías con IDs específicos
-            categoryRepository.save(new Category(1L, "Conflictos"));
-            categoryRepository.save(new Category(2L, "Propuestas"));
-            categoryRepository.save(new Category(3L, "Iniciativas"));
-            System.out.println("Categorías inicializadas correctamente");
+            System.out.println("========================================");
+            System.out.println("INICIALIZANDO DATOS EN LA BASE DE DATOS");
+            System.out.println("========================================");
+            
+            // Inicializar Categorías
+            System.out.println("\n📁 CATEGORÍAS:");
+            saveOrUpdateCategory(categoryRepository, 1L, "Conflictos");
+            saveOrUpdateCategory(categoryRepository, 2L, "Propuestas");
+            saveOrUpdateCategory(categoryRepository, 3L, "Iniciativas");
+            System.out.println("✓ Total categorías: " + categoryRepository.count());
+            
+            // Inicializar Tags
+            System.out.println("\n🏷️  TAGS:");
+            saveOrUpdateTag(tagRepository, 1L, "Medio Ambiente");
+            saveOrUpdateTag(tagRepository, 2L, "Feminismos");
+            saveOrUpdateTag(tagRepository, 3L, "Servicios Públicos");
+            saveOrUpdateTag(tagRepository, 4L, "Vivienda");
+            saveOrUpdateTag(tagRepository, 5L, "Urbanismo");
+            saveOrUpdateTag(tagRepository, 6L, "Movilidad");
+            saveOrUpdateTag(tagRepository, 7L, "Cultura");
+            saveOrUpdateTag(tagRepository, 8L, "Economía y empleo");
+            saveOrUpdateTag(tagRepository, 9L, "Deporte");
+            saveOrUpdateTag(tagRepository, 10L, "Memoria democrática");
+            System.out.println("✓ Total tags: " + tagRepository.count());
+            
+            System.out.println("\n========================================");
+            System.out.println("✅ DATOS INICIALIZADOS CORRECTAMENTE");
+            System.out.println("========================================\n");
         };
     }
 
-    @Bean
-    public CommandLineRunner initTags(TagRepository tagRepository) {
-        return args -> {
-            // Guardar/actualizar tags con IDs específicos
-            tagRepository.save(new Tag(1L, "Medio Ambiente"));
-            tagRepository.save(new Tag(2L, "Feminismos"));
-            tagRepository.save(new Tag(3L, "Servicios Públicos"));
-            tagRepository.save(new Tag(4L, "Vivienda"));
-            tagRepository.save(new Tag(5L, "Urbanismo"));
-            tagRepository.save(new Tag(6L, "Movilidad"));
-            tagRepository.save(new Tag(7L, "Cultura"));
-            tagRepository.save(new Tag(8L, "Economía y empleo"));
-            tagRepository.save(new Tag(9L, "Deporte"));
-            tagRepository.save(new Tag(10L, "Memoria democrática"));
-            System.out.println("Tags inicializadas correctamente");
-        };
+    private void saveOrUpdateCategory(CategoryRepository repository, Long id, String name) {
+        Category category = repository.findById(id).orElse(new Category());
+        category.setId(id);
+        category.setName(name);
+        repository.save(category);
+        System.out.println("  ✓ ID " + id + ": " + name);
+    }
+
+    private void saveOrUpdateTag(TagRepository repository, Long id, String name) {
+        Tag tag = repository.findById(id).orElse(new Tag());
+        tag.setId(id);
+        tag.setName(name);
+        repository.save(tag);
+        System.out.println("  ✓ ID " + id + ": " + name);
     }
 
 }
