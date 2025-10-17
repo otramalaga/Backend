@@ -82,28 +82,29 @@ public class SecurityConfig {
     @Bean
     public CommandLineRunner initCategories(CategoryRepository categoryRepository) {
         return args -> {
-            if (categoryRepository.count() == 0) {
-                categoryRepository.save(new Category(1L, "Conflictos"));
-                categoryRepository.save(new Category(2L, "Propuestas"));
-                categoryRepository.save(new Category(3L, "Iniciativas"));
-            }
+            // Guardar/actualizar categorías con IDs específicos
+            categoryRepository.save(new Category(1L, "Conflictos"));
+            categoryRepository.save(new Category(2L, "Propuestas"));
+            categoryRepository.save(new Category(3L, "Iniciativas"));
+            System.out.println("Categorías inicializadas correctamente");
         };
     }
 
     @Bean
     public CommandLineRunner initTags(TagRepository tagRepository) {
         return args -> {
-            if (tagRepository.count() == 0) {
-                tagRepository.save(new Tag(1L, "Medio Ambiente"));
-                tagRepository.save(new Tag(2L, "Feminismos"));
-                tagRepository.save(new Tag(3L, "Servicios Públicos"));
-                tagRepository.save(new Tag(4L, "Vivienda"));
-                tagRepository.save(new Tag(5L, "Urbanismo"));
-                tagRepository.save(new Tag(6L, "Movilidad"));
-                tagRepository.save(new Tag(8L, "Economía y empleo"));
-                tagRepository.save(new Tag(9L, "Deporte"));
-                tagRepository.save(new Tag(10L, "Memoria democrática"));
-            }
+            // Guardar/actualizar tags con IDs específicos
+            tagRepository.save(new Tag(1L, "Medio Ambiente"));
+            tagRepository.save(new Tag(2L, "Feminismos"));
+            tagRepository.save(new Tag(3L, "Servicios Públicos"));
+            tagRepository.save(new Tag(4L, "Vivienda"));
+            tagRepository.save(new Tag(5L, "Urbanismo"));
+            tagRepository.save(new Tag(6L, "Movilidad"));
+            tagRepository.save(new Tag(7L, "Cultura"));
+            tagRepository.save(new Tag(8L, "Economía y empleo"));
+            tagRepository.save(new Tag(9L, "Deporte"));
+            tagRepository.save(new Tag(10L, "Memoria democrática"));
+            System.out.println("Tags inicializadas correctamente");
         };
     }
 
