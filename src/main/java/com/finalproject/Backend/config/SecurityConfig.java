@@ -18,7 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.CorsFilter;
 
 import com.finalproject.Backend.model.Tag;
+import com.finalproject.Backend.model.Category;
 import com.finalproject.Backend.repository.TagRepository;
+import com.finalproject.Backend.repository.CategoryRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -78,12 +80,30 @@ public class SecurityConfig {
 
 
     @Bean
+    public CommandLineRunner initCategories(CategoryRepository categoryRepository) {
+        return args -> {
+            if (categoryRepository.count() == 0) {
+                categoryRepository.save(new Category(1L, "Conflictos"));
+                categoryRepository.save(new Category(2L, "Propuestas"));
+                categoryRepository.save(new Category(3L, "Iniciativas"));
+            }
+        };
+    }
+
+    @Bean
     public CommandLineRunner initTags(TagRepository tagRepository) {
         return args -> {
             if (tagRepository.count() == 0) {
-                tagRepository.save(new Tag(1L, "Tag 1"));
-                tagRepository.save(new Tag(2L, "Tag 2"));
-                tagRepository.save(new Tag(3L, "Tag 3"));
+                tagRepository.save(new Tag(1L, "Medio Ambiente"));
+                tagRepository.save(new Tag(2L, "Feminismos"));
+                tagRepository.save(new Tag(3L, "Servicios Públicos"));
+                tagRepository.save(new Tag(4L, "Vivienda"));
+                tagRepository.save(new Tag(5L, "Urbanismo"));
+                tagRepository.save(new Tag(6L, "Movilidad"));
+                tagRepository.save(new Tag(7L, "Cultura"));
+                tagRepository.save(new Tag(8L, "Economía y empleo"));
+                tagRepository.save(new Tag(9L, "Deporte"));
+                tagRepository.save(new Tag(10L, "Memoria democrática"));
             }
         };
     }
