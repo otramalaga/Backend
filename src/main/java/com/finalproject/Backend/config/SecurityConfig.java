@@ -100,7 +100,6 @@ public class SecurityConfig {
                 tagRepository.save(new Tag(4L, "Vivienda"));
                 tagRepository.save(new Tag(5L, "Urbanismo"));
                 tagRepository.save(new Tag(6L, "Movilidad"));
-                tagRepository.save(new Tag(7L, "Cultura"));
                 tagRepository.save(new Tag(8L, "Economía y empleo"));
                 tagRepository.save(new Tag(9L, "Deporte"));
                 tagRepository.save(new Tag(10L, "Memoria democrática"));
