@@ -43,7 +43,7 @@ public class BookmarkService {
     }
 
     public List<BookmarkResponseDTO> getAll() {
-        return bookmarkRepository.findAll()
+        return bookmarkRepository.findAllWithAssociations()
                 .stream()
                 .map(BookmarkMapper::toDTO)
                 .collect(Collectors.toList());

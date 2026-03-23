@@ -1,6 +1,8 @@
 package com.finalproject.Backend.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +48,7 @@ public class Bookmark {
     private User user;
 
     @ElementCollection
+    @Fetch(FetchMode.SUBSELECT)
     @CollectionTable(name = "bookmark_images", joinColumns = @JoinColumn(name = "bookmark_id"))
     @Column(name = "image_url", length = 1000)
     private List<String> imageUrls;

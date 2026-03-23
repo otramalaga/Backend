@@ -16,8 +16,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users", 
       uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
@@ -37,6 +37,18 @@ public class User {
 
    @NotBlank
    private String password;
+
+   @Column(name = "email_verified")
+   private Boolean emailVerified = false;
+
+   @Column(name = "verification_token", length = 100)
+   private String verificationToken;
+
+   @Column(name = "reset_password_token", length = 100)
+   private String resetPasswordToken;
+
+   @Column(name = "reset_password_token_expiry")
+   private LocalDateTime resetPasswordTokenExpiry;
 
   
    @Column(name = "created_at")

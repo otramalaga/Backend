@@ -49,13 +49,17 @@ class UserTest {
         Tag tag = new Tag();
         tag.setId(1L);
         tag.setName("Canada");
-        String interests = "Gaming, Cooking";
-        String bio = "Another test user bio.";
         LocalDateTime createdAt = LocalDateTime.now().minusDays(1);
         LocalDateTime updatedAt = LocalDateTime.now();
 
         // ACT
-        User user = new User(id, name, email, password, createdAt, updatedAt);
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setCreatedAt(createdAt);
+        user.setUpdatedAt(updatedAt);
 
         // ASSERT
         assertNotNull(user);

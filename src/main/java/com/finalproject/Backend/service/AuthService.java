@@ -12,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,6 +38,17 @@ public class AuthService {
        System.out.println("Starting authentication process for email: " + loginRequest.getEmail());
        
        try {
+           // Verificar que el email esté verificado antes de autenticar
+           User user = userRepository.findByEmail(loginRequest.getEmail())
+                   .orElseThrow(() -> {
+                       System.out.println("User not found: " + loginRequest.getEmail());
+                       return new UnauthorizedException("Credenciales inválidas");
+                   });
+           
+           if (user.getEmailVerified() == null || !user.getEmailVerified()) {
+               throw new UnauthorizedException("Por favor verifica tu email antes de iniciar sesión. Revisa tu bandeja de entrada.");
+           }
+           
            Authentication authentication = authenticationManager.authenticate(
                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
@@ -48,15 +58,6 @@ public class AuthService {
            
            String jwt = jwtUtils.generateJwtToken(authentication);
            
-           UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-           String email = userDetails.getUsername();
-           
-           User user = userRepository.findByEmail(email)
-                   .orElseThrow(() -> {
-                       System.out.println("User not found after authentication: " + email);
-                       return new UnauthorizedException("Credenciales inválidas");
-                   });
-           
            System.out.println("Authentication and token generation completed for user ID: " + user.getId());
            
            return new JwtResponse(
@@ -65,6 +66,8 @@ public class AuthService {
                    user.getId(),
                    user.getName(),
                    user.getEmail());
+       } catch (UnauthorizedException e) {
+           throw e;
        } catch (Exception e) {
            System.out.println("Error during authentication: {}" + e.getMessage());
            throw e;
